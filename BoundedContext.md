@@ -1,5 +1,5 @@
 # Bounded context (BC)
-        **== autonomous components (own domain models an ubiquitous language.**
+  **== autonomous components (own domain models an ubiquitous language.**
 * No dependencies on each other at runtime
 * should be able to run in isolation
 * updated/modified independent from each other
