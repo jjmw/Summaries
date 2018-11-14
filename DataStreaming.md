@@ -14,8 +14,6 @@ Things like traffic sensors, health sensors, transaction logs, and activity logs
 - [Apache Flink](https://flink.apache.org/) Distributed computation over data streams
 - [Apache Storm](https://storm.apache.org/) High data velocity.
 
-
-
 # **Devoxx Apache Kafka Presentation of James Ward**
 
 Integration Complexity:
