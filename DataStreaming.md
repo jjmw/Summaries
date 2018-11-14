@@ -36,7 +36,7 @@ The Reactive Streams specification defines a model for **back pressure**. The el
 ### **Kafka = Event Ledge + Distributed & Redundant**
 ![Kafka](images/kafka1.png)
 
-### **Kafka: Liniar scaling** (near network speed)
+### **Kafka: Liniar scaling** (near network speed between nodes/brokers)
 
 Kafka Fundamentals:
 ![Kafka Fundamentals](images/kafka2.png)

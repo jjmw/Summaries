@@ -15,8 +15,10 @@ psql# ALTER USER <username> WITH ENCRYPTED PASSWORD '<password>';
 psql# GRANT ALL PRIVILEGES ON DATABASE <databasename> to <username>;
 
 
-
-
+## create csv file:
+```sql
+COPY (SELECT * FROM "public".empbase) TO '/tmp/empbase.csv' WITH CSV header;
+```
 
 ## In jupyter:
 > first install:
