@@ -65,9 +65,9 @@ Extract, Transform, Load, Transform
 
 
 ## **Tools**
-https://www.getdbt.com/
-https://fivetran.com/
-https://www.stitchdata.com/
+1. https://www.getdbt.com/
+2. https://fivetran.com/
+3. https://www.stitchdata.com/
 
 
 
