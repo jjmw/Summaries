@@ -64,6 +64,12 @@ ie a perfect platform is Hadoop but needs carefully planning
 Extract, Transform, Load, Transform
 
 
+## **Tools**
+1. https://www.getdbt.com/
+2. https://fivetran.com/
+3. https://www.stitchdata.com/
+
+
 
 
 Sources:
