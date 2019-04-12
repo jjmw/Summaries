@@ -56,3 +56,19 @@ conn.close()
 
 sources:
 https://www.postgresql.org/files/documentation/pdf/11/postgresql-11-A4.pdf
+
+
+## Connection from Apache Spark example:
+```scala
+val driver = "org.postgresql.Driver"
+Class.forName(driver)
+
+val df =  spark.sqlContext
+    .read
+    .format("jdbc")
+    .options(Map("url"->"jdbc:postgresql://172.17.0.2:5432/postgres", "user"->"postgres","password"->"qw12aap","driver"->driver,"dbtable"->"company"))
+    .load()
+```
+
+
+
