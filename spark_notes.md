@@ -73,6 +73,7 @@ Kind of actions:
 ![Architecture Spark Application](images/ReadSortTakeDataframe.png)
 
 ## logical plan
+
 The logical plan of transformations that we build up defines a lineage for the DataFrame so that at any given point in time, Spark knows how to recompute any partition by performing all of the operations it had before on the same input data
 
 ## DataFrames and SQL
@@ -93,7 +94,7 @@ val dataFrameWay = flightData2015
     .count()
 ```
 
-# Spark Toolset
+## Spark Toolset
 
 ![Spark toolset](images/spark_toolset.png)
 
@@ -138,7 +139,7 @@ Advantage of Dataset use is that when call collect or take on a Dataset, it will
 
 ## Structured Streaming
 
-Structured Streaming is a high-level API for stream processing that became production-ready in Spark 2.2. 
+Structured Streaming is a high-level API for stream processing that became production-ready in Spark 2.2.
 It also makes it easy to conceptualize because you can write your batch job as a way to prototype it and then you can convert it to a streaming job
 
 ## Machine Learning and Advanced Analytics
@@ -153,4 +154,63 @@ RDDs are available in Scala as well as Python. However, they’re not equivalent
 
 ## Spark’s Ecosystem and Packages
 
-https://spark-packages.org/
+[Spark Packages](https://spark-packages.org/)
+
+## Structured APIs
+
+The Structured APIs are the fundamental abstraction that you will use to write the majority of your data flows.
+DataFrames and Datasets represent immutable, lazily evaluated plans that specify what operations to apply to data residing at a location to generate some output.
+Support schema on write and schema on read.
+
+Spark uses an engine called **Catalys** and Spark is a program language in it own. The majority of our manipulations will operate strictly on Spark types.
+
+Within the Structured APIs, two more APIs:
+
+- untyped Dataframes; typed at runtime
+- typed Datasets at compile time
+
+The “Row” type is Spark’s internal representation of its optimized in-memory format for computation. DataFrames are simply Datasets of Type Row.
+
+## Columns
+
+Columns represent a simple type like an integer or string a complex type like an array or map, or a null value.
+
+## Spark Types
+
+To work with the correct Scala types, use the following:
+
+```scala
+import org.apache.spark.sql.types._
+val b = ByteType
+```
+
+Te get the Spark type:
+the Scala type ie:
+
+- Short ==> ByteType
+- Int ==> IntegerType
+- etc
+
+## Overview of Structured API Execution
+
+single structured API query steps:
+
+1. Write DataFrame/Dataset/SQL Code
+2. If valid code, Spark converts this to a Logical Plan.
+3. Spark transforms this Logical Plan to a Physical Plan, checking for optimizations along the way
+4. Spark then executes this Physical Plan (RDD manipulations) on the cluster.
+
+overview
+![Catalyst Optimizer](images/CatalystOptimizer.png)
+
+Logical plan is first created and represents a set of abstract transformations that do not refer to executors or drivers. This plan is unresolved because although your code might be valid, the tables or columns that it refers to might or might not exist. Spark uses the catalog, a repository of all table and DataFrame information, to resolve columns and tables in the analyzer. The analyzer might reject the unresolved logical plan if the required table or column name does not exist in the catalog. Packages can extend the Catalyst to include their own rules for domain-specific optimizations.
+
+![LogicalPlan Spark](images/LogicalPlanSpark.png)
+
+The physical plan, often called a Spark plan, specifies how the logical plan will execute on the cluster by generating different physical execution strategies and comparing them through a cost model. Physical planning results in a series of RDDs and transformations
+
+![PhysicalPlan Spark](images/PhysicalPlanSpark.png)
+
+## Execution
+
+Upon selecting a physical plan, Spark runs all of this code over RDDs. further optimizations at runtime, generating native Java bytecode that can remove entire tasks or stages during execution.
