@@ -23,7 +23,7 @@ resources to Spark Applications:
 
 Spark in _local mode_: driver and executor are simply processes.
 
-## Language APIs
+### Language APIs
 
 All languages (R, Python, Scala, Java) have similar performance characteristics when using structured API's.
 When Python is using UDF then performance drops. Reason the Python code is executed in a separate Python process outside the JVM.
@@ -33,7 +33,7 @@ Spark has two fundamental sets of APIs:
 - low-level "unstructured" (RDD)
 - higher-level "structured" (Dataframe and Dataset)
 
-## Spark Session
+### Spark Session
 
 ```scala
 val myRange = spark.range(1000).toDF("number")
@@ -41,7 +41,7 @@ val myRange = spark.range(1000).toDF("number")
 
 range of numbers represents a distributed collection: each part of this range of numbers exists on a different executor
 
-## Partitions
+### Partitions
 
 To allow every executor to perform work in parallel, Spark breaks up the data into chunks called partitions. A  partition is a collection of rows that sit on one physical machine in your cluster
 
@@ -51,7 +51,7 @@ spark.conf.set("spark.sql.shuffle.partitions", "5")
 
 Default is 200 partitions
 
-## Transformations
+### Transformations
 
  Core data structures are immutable. To “change” , ie a DataFrame, you need to instruct Spark how you would like to modify it to do what you want. These instructions are called *transformations*. Return no output (**lazy evaluation**) This is because we specified only an abstract transformation, and Spark will not act on transformations until we call an action, but build up a plan of transformations (predicate pushdown)
 
@@ -60,7 +60,7 @@ Types of transformations:
 - narrow: one input partition ==> one output partition
 - wide: input partitions ==> many output partitions (shuffle= Spark writes to disk) ie aggregation and sort
 
-## Actions
+### Actions
 
 An action instructs Spark to compute a result from a series of transformations. ie count.
 
@@ -72,11 +72,11 @@ Kind of actions:
 
 ![Architecture Spark Application](images/ReadSortTakeDataframe.png)
 
-## logical plan
+### logical plan
 
 The logical plan of transformations that we build up defines a lineage for the DataFrame so that at any given point in time, Spark knows how to recompute any partition by performing all of the operations it had before on the same input data
 
-## DataFrames and SQL
+### DataFrames and SQL
 
 Register any DataFrame as a table or
 view (a temporary table) and query it using pure SQL. There is **no performance** difference between writing SQL queries or writing DataFrame code, they both “compile” to the same
@@ -94,11 +94,13 @@ val dataFrameWay = flightData2015
     .count()
 ```
 
+---
+
 ## Spark Toolset
 
 ![Spark toolset](images/spark_toolset.png)
 
-## Running Production Applications (spark-submit)
+### Running Production Applications (spark-submit)
 
 spark-submit does one thing: it lets you send your application code to a cluster and launch it to execute there
 
@@ -116,7 +118,7 @@ JARS=$(files=("$LIB"/*.jar); IFS=,; echo "${files[*]}")
 ./examples/jars/spark-examples_2.11-2.2.0.jar 10
 ```
 
-## Datasets: Type-Safe Structured APIs
+### Datasets: Type-Safe Structured APIs
 
 Datasets: statically type code in Java and Scala
 
@@ -137,24 +139,26 @@ val flights = flightsDF.as[Flight]
 
 Advantage of Dataset use is that when call collect or take on a Dataset, it will collect objects of the proper type in your Dataset, not DataFrame Rows. This makes it easy to get type safety and securely perform manipulation in a distributed and a local manner without code changes
 
-## Structured Streaming
+### Structured Streaming
 
 Structured Streaming is a high-level API for stream processing that became production-ready in Spark 2.2.
 It also makes it easy to conceptualize because you can write your batch job as a way to prototype it and then you can convert it to a streaming job
 
-## Machine Learning and Advanced Analytics
+### Machine Learning and Advanced Analytics
 
 Machine learning algorithms in MLlib require that data is represented as numerical values. All machine learning algorithms in Spark take as input a Vector type
 
-## Lower-Level APIs
+### Lower-Level APIs
 
 Virtually everything in Spark is built on
 top of RDDs. One thing that you might use RDDs for is to parallelize raw data that you have stored in memory on the driver machine.
 RDDs are available in Scala as well as Python. However, they’re not equivalent.
 
-## Spark’s Ecosystem and Packages
+### Spark’s Ecosystem and Packages
 
 [Spark Packages](https://spark-packages.org/)
+
+---
 
 ## Structured APIs
 
@@ -171,11 +175,11 @@ Within the Structured APIs, two more APIs:
 
 The “Row” type is Spark’s internal representation of its optimized in-memory format for computation. DataFrames are simply Datasets of Type Row.
 
-## Columns
+### Columns
 
 Columns represent a simple type like an integer or string a complex type like an array or map, or a null value.
 
-## Spark Types
+### Spark Types
 
 To work with the correct Scala types, use the following:
 
@@ -191,7 +195,7 @@ the Scala type ie:
 - Int ==> IntegerType
 - etc
 
-## Overview of Structured API Execution
+### Overview of Structured API Execution
 
 single structured API query steps:
 
@@ -211,6 +215,182 @@ The physical plan, often called a Spark plan, specifies how the logical plan wil
 
 ![PhysicalPlan Spark](images/PhysicalPlanSpark.png)
 
-## Execution
+### Execution
 
 Upon selecting a physical plan, Spark runs all of this code over RDDs. further optimizations at runtime, generating native Java bytecode that can remove entire tasks or stages during execution.
+
+---
+
+## Basic Structured Operations
+
+### Schemas
+
+A schema is a StructType made up of:
+
+- a number of fields
+- StructFields, that have a name
+- type (Spark types)
+- Boolean flag: column can contain missing or null values
+- optionally specify associated metadata with that column
+
+The metadata is a way of storing information about this column (Spark uses this in its machine learning library).
+
+```scala
+import org.apache.spark.sql.types.{StructField,StructType, StringType,LongType}
+import org.apache.spark.sql.types.Metadata
+
+val myManualSchema = StructType(Array(
+StructField("DEST_COUNTRY_NAME", StringType, true),
+StructField("ORIGIN_COUNTRY_NAME", StringType, true),
+StructField("count", LongType, false,
+Metadata.fromJson("{\"hello\":\"world\"}"))
+))
+
+val df = spark
+    .read
+    .format("json")
+    .schema(myManualSchema)
+    .load("/data/2015-summary.json")
+```
+
+### Columns and Expressions
+
+You cannot manipulate an individual column outside the context of a DataFrame; you must use Spark transformations
+within a DataFrame to modify the contents of a column.
+
+Different ways to construct and refer to columns:
+
+```scala
+import org.apache.spark.sql.functions.{col, column}
+col("someColumnName")
+column("someColumnName")
+$"someColumnName"
+'someColumnName
+
+df.col("count")   // use
+```
+
+__**Columns are not resolved until we compare the column names with those we are maintaining in the catalog. Column and table resolution happens in the analyzer
+phase.**__
+
+### Expressions
+
+Columns are expressions. An expression is a set of transformations on one or more values in a record in a DataFrame. (a function that takes as input one or more column names, resolves them, and then potentially
+applies more expressions to create a single value for each record in the dataset)
+
+ Each row in a DataFrame is a single record as an object of type Row
+
+### Creating Rows
+
+Only DataFrames have schemas. Rows themselves do not have
+schemas.
+
+```scala
+import org.apache.spark.sql.Row
+val myRow = Row("Hello", null, 1, false)
+
+myRow(0) // type Any
+myRow(0).asInstanceOf[String] // String
+myRow.getString(0) // String
+myRow.getInt(2) // Int
+```
+
+### Creating DataFrames
+
+```scala
+val df = spark
+    .read
+    .format("json")
+    .load("/data/2015-summary.json")
+df.createOrReplaceTempView("dfTable")
+```
+
+or
+
+```scala
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{StructField,StructType,StringType,LongType}
+
+val myManualSchema = new StructType(Array(
+new StructField("some", StringType, true),
+new StructField("col", StringType, true),
+new StructField("names", LongType, false)))
+val myRows = Seq(Row("Hello", null, 1L))
+
+val myRDD = spark
+    .sparkContext
+    .parallelize(myRows)
+
+val myDf = spark
+    .createDataFrame(myRDD, myManualSchema)
+
+myDf.show()
+```
+
+### select and selectExpr
+
+```scala
+mDF.select("colA","colB").show()
+mDF.select('colA).show()
+mDF.select(col("colA")).show()
+mDF.select(expr("colA as aap")).show() // most flexible
+mDF.select(expr("colA").alias("aap")).show()
+mDF.selectExpr("colA as aap", "colB").show() // daily use; opens up the true power of Spark.
+```
+
+### Adding, renaming and dropping Columns
+
+Dataframe is NOT modified!!
+
+```scala
+df.withColumn("numberOne", lit(1))
+df.withColumn("withinCountry", expr("ORIGIN_COUNTRY_NAME == DEST_COUNTRY_NAME"))
+
+df.withColumnRenamed("DEST_COUNTRY_NAME","dest")
+
+df.drop("DEST_COUNTRY_NAME")
+
+```
+
+### Case Sensitivity
+
+By default Spark is case insensitive. Make sensitive:
+
+```scala
+spark.sql("""set spark.sql.caseSensitive true""")
+```
+
+### Changing a Column’s Type (cast)
+
+```scala
+df.withColumn("count2", col("count").cast("long"))
+```
+
+### Filtering Rows and Unique Rows
+
+```scala
+df.filter(col("count") < 2).show(2)
+df.where("count < 2").show(2)
+
+df.select("ORIGIN_COUNTRY_NAME", "DEST_COUNTRY_NAME")
+    .distinct().count()
+```
+
+### Random Samples and Split
+
+```scala
+// Random Sample
+val seed = 5
+val withReplacement = false
+val fraction = 0.5
+df.sample(withReplacement, fraction, seed).count()
+
+// Random Splits
+val dataFrames = df
+    .randomSplit(Array(0.25, 0.75), seed)
+dataFrames(0)
+    .count() > dataFrames(1)
+    .count() // False
+```
+
+## Working with Different Types of Data
