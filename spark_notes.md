@@ -270,8 +270,8 @@ $"someColumnName"
 df.col("count")   // use
 ```
 
-__**Columns are not resolved until we compare the column names with those we are maintaining in the catalog. Column and table resolution happens in the analyzer
-phase.**__
+**Columns are not resolved until we compare the column names with those we are maintaining in the catalog. Column and table resolution happens in the analyzer
+phase.**
 
 ### Expressions
 
@@ -393,4 +393,37 @@ dataFrames(0)
     .count() // False
 ```
 
+---
+
 ## Working with Different Types of Data
+
+**lit function**. This function converts a type in another language to its correspnding Spark representation.
+
+```scala
+import org.apache.spark.sql.functions.lit
+df.select(lit(5), lit("five"), lit(5.0))
+```
+
+```scala
+// where as in sql; === equal =!= not equal
+vlucht.where(col("count") === 15)
+    .select("*")
+    .show(10)
+
+// best way
+vlucht.where("count = 15").show(10)
+
+// column aap boolean; == equal
+vlucht.selectExpr("*","count == 15 as aap").show(10)
+```
+
+**Better just write SQL!!!!**
+
+```scala
+// compute summary statistics
+df.describe().show()
+```
+
+### Working with Dates and Timestamps
+
+There are dates, which focus exclusively on calendar dates, and timestamps, which include both date and time information. Spark’s TimestampType class supports only second-level precision, which means that if you’re going to be working with milliseconds or microseconds, you’ll need to work around this problem by potentially operating on them as longs.
