@@ -427,3 +427,63 @@ df.describe().show()
 ### Working with Dates and Timestamps
 
 There are dates, which focus exclusively on calendar dates, and timestamps, which include both date and time information. Spark’s TimestampType class supports only second-level precision, which means that if you’re going to be working with milliseconds or microseconds, you’ll need to work around this problem by potentially operating on them as longs.
+
+### Working with Complex Types
+
+Structs:
+Think of structs as DataFrames within DataFrames
+
+```scala
+import org.apache.spark.sql.functions.struct
+val complexDF = df.select(struct("Description","InvoiceNo")
+    .alias("complex"))
+
+complexDF.select(col("complex")
+    .getField("Description"))
+    .show()
+```
+
+split
+  
+```scala
+import org.apache.spark.sql.functions.split
+df.select(split(col("Description"), " ")
+    .alias("array_col"))
+    .selectExpr("array_col[0]")
+    .show(2)
+```
+
+### User-Defined Functions (UDF)
+
+One of the most powerful things that you can do in Spark is define your own functions. Functions that operate on the data, record by record.
+
+Performance considerations:
+
+- UDFs in Scala or Java, you can use it within the Java Virtual Machine (JVM)
+- In Python Spark starts a Python process on the workers and serializes all data to a format that Python understands.
+
+```scala
+val udfExampleDF = spark.range(5).toDF("num")
+def power3(number:Double):Double = number * number * number
+
+import org.apache.spark.sql.functions.udf
+val power3udf = udf(power3(_:Double):Double)
+
+udfExampleDF.select(power3udf(col("num"))).show()
+
+// register
+
+spark.udf.register("power3", power3(_:Double):Double)
+udfExampleDF.selectExpr("power3(num)").show(2)
+```
+
+## Aggregations
+
+groupings types in Spark:
+(all return a RelationalGroupedDataset)
+
+- group by
+- window
+- grouping set
+- rollup
+- cube
