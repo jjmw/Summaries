@@ -1,4 +1,4 @@
-Why open source?
+# Why open source
 
 Cloud computing brought a completely new and agile way of thinking about the vendor/consumer business model with the pay-as-you-grow model and SaaS. This model forced vendors to become more efficient and accurate with respect to how they deliver their software and think about the value behind their product.
 The world where the consumer was willing to pay for “shelfware” is long gone, as **cloud** has also empowered the consumer to be more sophisticated with the way they measure the value behind a product and make data-driven decisions.
@@ -15,7 +15,7 @@ The monetization process starts after the customer is already convinced and has 
 When Amazon started to provide managed offering of specific open source products, they were breaking right into the middle of this assumption. That broke the entire “trust system” that stood behind many 
 of the open source models. 
 
-Amazon are abusing open source products to their benefit, 
+___Amazon are abusing open source products to their benefit___
 
 Google was the first to realize this with the launch of Kubernetes as an open source project and win more cloud business by demonstrating a “non lock-in” strategy with open source.
 what’s in it for Google? t’s the same strategy that helped Google beat Apple in the smartphone business — launching Android as an open alternative to iOS.
