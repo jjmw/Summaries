@@ -49,13 +49,15 @@ management effort or service provider interaction
 
 # Service Models:
 ## On Premise (green customer managed, orange Provider managed)
-![](images/onpremise.png)
+![](../images/onpremise.png)
 
 ## Colo (green customer managed, orange Provider managed)
-![](images/colo.png)
+![](../images/colo.png)
 
 1. ## Software as a Service (SaaS)
-   The capability provided to the consumer is to use the provider’s applications running on a cloud infrastructure. The applications are accessible from various client devices through either a thin client interface, such as a web browser (e.g., web-based email), or a program interface. The consumer does not manage or control the underlying cloud infrastructure including network, servers, operating systems, storage, or even individual application capabilities, with the possible exception of limited user-specific application configuration settings. ![](images/SaaS.png)
+   The capability provided to the consumer is to use the provider’s applications running on a cloud infrastructure. The applications are accessible from various client devices through either a thin client interface, such as a web browser (e.g., web-based email), or a program interface. The consumer does not manage or control the underlying cloud infrastructure including network, servers, operating systems, storage, or even individual application capabilities, with the possible exception of limited user-specific application configuration settings.
+   ![SaaS](../images/SaaS.png)
+
    > examples:
    - Microsoft Office 365
    - Salesforce.com
@@ -63,8 +65,9 @@ management effort or service provider interaction
    - Adobe Creative Cloud
    - Gmail
 
-2. ## Platform as a Service (PaaS) 
-   The capability provided to the consumer is to deploy onto the cloud infrastructure consumer-created or acquired applications created using programming languages, libraries, services, and tools supported by the provider. 3 The consumer does not manage or control the underlying cloud infrastructure including network, servers, operating systems, or storage, but has control over the deployed applications and possibly configuration settings for the application-hosting environment. ![](images/PaaS.png)
+2. ## Platform as a Service (PaaS)
+
+   The capability provided to the consumer is to deploy onto the cloud infrastructure consumer-created or acquired applications created using programming languages, libraries, services, and tools supported by the provider. 3 The consumer does not manage or control the underlying cloud infrastructure including network, servers, operating systems, or storage, but has control over the deployed applications and possibly configuration settings for the application-hosting environment. ![PaaS](../images/PaaS.png)
    > examples:
    - AWS Elastic Beanstalk
    - Microsoft Azure (offers both IaaS and PaaS services)
@@ -73,10 +76,12 @@ management effort or service provider interaction
    - IBM Bluemix
 
 3. ## Infrastructure as a Service (IaaS)
-   The capability provided to the consumer is to provision processing, storage, networks, and other fundamental computing resources where the consumer is able to deploy and run arbitrary software, which can include operating systems and applications. The consumer does not manage or control the underlying cloud infrastructure but has control over operating systems, storage, and deployed applications; and possibly limited control of select networking components (e.g., host firewalls). ![](images/IaaS.png)
 
+The capability provided to the consumer is to  rovision processing, storage, networks, and other fundamental computing resources where the consumer is able to deploy and run arbitrary software, which can include operating systems and applications. The consumer does not manage or control the underlying cloud infrastructure but has control over operating systems, storage, and deployed applications; and possibly limited control of select networking components (e.g., host firewalls).
+![IAS](../images/IaaS.png)
 
 >Cloud Providers will often offer three distinct flavours of IaaS compute:
+
 - Virtual machines on shared physical servers
   - different customers share same underlying physical servers
   - least expensive
@@ -96,21 +101,22 @@ management effort or service provider interaction
   - AWS doesn't offer this option
 - Customers can mix and match between the three types
 
-
-
 ## Optional Servide Model (not defined by NIST) XaaS
+
 > Many cloud providers also offer other ‘as a Services’
 These are sometimes described as XaaS ‘Anything as a Service’
 Examples include:
+
 - DaaS Desktop As A Service
 - DRaaS Disaster Recopry As A Service
 - BaaS Backup As A Service
 - Storage As A Device
--  .... many more ..
+- .... many more ..
 
+# Deployment Models
 
-# Deployment Models:
-1. ## Private cloud.
+1. ## Private cloud
+
    The cloud infrastructure is provisioned for exclusive use by a single organization comprising multiple consumers (e.g., business units). It may be owned, managed, and operated by the organization, a third party, or some combination of them, and it may exist on or off premises.
     - different than On Prem?
       - On-Demant Self-Service
@@ -122,11 +128,14 @@ Examples include:
       - company will use automation software
       - Private Cloud is most suitable for large companies where the long term ROI and efficiency gains can outweigh the initial effort and cost to set up the infrastructure and automated workflows
 
-2. ## Community cloud.
+2. ## Community cloud
+
     The cloud infrastructure is provisioned for exclusive use by a specific community of consumers from organizations that have shared concerns (e.g., mission, security requirements, policy, and compliance considerations). It may be owned, managed, and operated by one or more of the organizations in the community, a third party, or some combination of them, and it may exist on or off premises.
     - least common deployment model
     - similar to a traditional extranet, but with full shared data center services instead of just network connectivity between On Prem offices
-3. ## Public cloud.
+
+3. ## Public cloud
+
     The cloud infrastructure is provisioned for open use by the general public. It may be owned, managed, and operated by a business, academic, or government organization, or some combination of them. It exists on the premises of the cloud provider.
    - examples
      - AWS
@@ -134,13 +143,14 @@ Examples include:
      - IBM Bluemix
      - Salesforce
    - Most common deployment model
-4. ## Hybrid cloud.
+
+4. ## Hybrid cloud
+
     The cloud infrastructure is a composition of two or more distinct cloud infrastructures (private, community, or public) that remain unique entities, but are bound together by standardized or proprietary technology that enables data and application portability (e.g., cloud bursting for load balancing between clouds).
     - Companies with limited Private Cloud infrastructure may ‘cloud burst’ into Public Cloud for additional capacity when required
     - A company could also have Private Cloud at their main site and use Public Cloud for their Disaster Recovery location
 
-
-
 sources:
-1. [The NIST Definition of Cloud Computing](https://csrc.nist.gov/publications/detail/sp/800-145/final)
+1. [The NIST Definition of Cloud Computing](https://csrc.nist.gov/publications/detail/sp/800-145/final
+
 2. [A Practical Introduction to Cloud Computing](https://www.udemy.com/introduction-cloud-computing)

@@ -10,7 +10,7 @@ Spark applications consists of
   - executing code assigned to it by the driver;
     - reporting the state of the computation on that executor back to the driver node;
 
-![Architecture Spark Application](images/architectureSparkApplication.png)
+![Architecture Spark Application](../images/architectureSparkApplication.png)
 
 ## cluster manager
 
