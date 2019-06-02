@@ -21,16 +21,3 @@ registreer de rsa.public key op de remote host
 - ssh -T [git@bitbucket.org](mailto:git@bitbucket.org)
 voer een phrase password in
 
----
-
-### Voor github:
-
-maak de locale repository:
-git clone .....
-
----
-
-Edit .gitignore to match the file you want to ignore
-git rm --cached /path/to/file
-
----

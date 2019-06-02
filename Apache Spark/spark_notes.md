@@ -70,7 +70,7 @@ Kind of actions:
 - collect data to native objects in the respective language
 - write to output data sources
 
-![Architecture Spark Application](images/ReadSortTakeDataframe.png)
+![Architecture Spark Application](../images/ReadSortTakeDataframe.png)
 
 ### logical plan
 
@@ -98,7 +98,7 @@ val dataFrameWay = flightData2015
 
 ## Spark Toolset
 
-![Spark toolset](images/spark_toolset.png)
+![Spark toolset](../images/spark_toolset.png)
 
 ### Running Production Applications (spark-submit)
 
@@ -205,15 +205,15 @@ single structured API query steps:
 4. Spark then executes this Physical Plan (RDD manipulations) on the cluster.
 
 overview
-![Catalyst Optimizer](images/CatalystOptimizer.png)
+![Catalyst Optimizer](../images/CatalystOptimizer.png)
 
 Logical plan is first created and represents a set of abstract transformations that do not refer to executors or drivers. This plan is unresolved because although your code might be valid, the tables or columns that it refers to might or might not exist. Spark uses the catalog, a repository of all table and DataFrame information, to resolve columns and tables in the analyzer. The analyzer might reject the unresolved logical plan if the required table or column name does not exist in the catalog. Packages can extend the Catalyst to include their own rules for domain-specific optimizations.
 
-![LogicalPlan Spark](images/LogicalPlanSpark.png)
+![LogicalPlan Spark](../images/LogicalPlanSpark.png)
 
 The physical plan, often called a Spark plan, specifies how the logical plan will execute on the cluster by generating different physical execution strategies and comparing them through a cost model. Physical planning results in a series of RDDs and transformations
 
-![PhysicalPlan Spark](images/PhysicalPlanSpark.png)
+![PhysicalPlan Spark](../images/PhysicalPlanSpark.png)
 
 ### Execution
 
