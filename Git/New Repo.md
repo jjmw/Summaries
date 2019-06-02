@@ -1,6 +1,6 @@
-New Repo
+# New Repo
 
-# New repository when local reposity is created first
+## New repository when local reposity is created first
 
 **remote:**
 create remote repository in regular way, with *remoteRepoName*
@@ -14,3 +14,16 @@ git remote add origin <ssh://git@bitbucket.org/gitbucketwillems59/**remoteRepoNa
 git pull origin master --allow-unrelated-histories   // merge remote with local
 git push origin master    // simply push to repository
 ```
+
+---
+
+- maak de locale repository:
+- git clone .....
+
+---
+
+- Edit .gitignore to match the file you want to ignore
+- git rm --cached /path/to/file
+- [sample ignore files for languages](https://github.com/github/gitignore)
+
+---

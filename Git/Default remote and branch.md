@@ -1,4 +1,6 @@
-Default remote and branch
+# GIT
+
+## Default remote and branch
 
 ```bash
 cat .git/config    // wil list the remote and branch
@@ -8,15 +10,27 @@ git push  // puches all modifications to the upstream repository
 ```
 
 ### maak initieel een ssh key:
+
 registreer de rsa.public key op de remote host
+
 - ssh-keygen -t rsa
 
+### Test de connectie
 
-### Test de connectie:
 - ssh -T [git@github.com](mailto:git@github.com)
 - ssh -T [git@bitbucket.org](mailto:git@bitbucket.org)
 voer een phrase password in
 
+---
+
 ### Voor github:
+
 maak de locale repository:
-git clone ..... 
+git clone .....
+
+---
+
+Edit .gitignore to match the file you want to ignore
+git rm --cached /path/to/file
+
+---
