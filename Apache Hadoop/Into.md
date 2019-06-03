@@ -87,3 +87,21 @@ The data input/output layer is primarily responsible for different file formats,
 ### Data Storage Medium
 
 HDFS is the primary data storage medium used in Hadoop. It is a Java-based, high-performant distributed filesystem that is based on the underlying UNIX File System.
+
+## Core Hadoop Ecosystem
+
+![coreHadoop](../images/CoreHadoopEcosystem.png)
+
+Hadoop can handle big files effectively. Breaking files  up in blocks of 64 or 128 mb (configurable) and stored across several commodity computers
+
+<img src="../images/File542.png" width="200">
+
+
+## HDFS Read Mechanism
+
+![read](../images/HDFS_Read_Mechanism.png)
+
+## HDFS Write Mechanism
+
+![write](../images/HDFS_Write_mechanism.jpeg)
+

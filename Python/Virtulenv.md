@@ -1,13 +1,16 @@
-Virtulenv
+# Virtulenv
+
+[latest doc](https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html)
+
 
 #### remove virtual environment
-rmvirtualenv <name>
+rmvirtualenv name
 
 #### create virtual environment
-mkvirtualenv -p python3.6 <name>
+mkvirtualenv -p python3.6 name
 
 #### switch virtual environmen
-workon <name>
+workon name
 
 #### List all of the environments.
 lsvirtualenv
