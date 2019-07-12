@@ -1,4 +1,4 @@
-# Virtulenv
+# Virtualenv
 
 [latest doc](https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html)
 
