@@ -1,6 +1,6 @@
-Cheat Sheat
+# Cheat Sheat
 
-### Python, Spark setting
+## Python, Spark setting
 
 ```bash
 # Spark home for full install
@@ -11,7 +11,7 @@ export PYTHONHASHSEED=0
 export PYSPARK_PYTHON=/usr/local/ipython/bin/ipython
 # Augment the default search path for shared libraries
 export LD_LIBRARY_PATH=/usr/local/ipython/bin/ipython
-# Augment the default search path for private libraries 
+# Augment the default search path for private libraries
 export PYTHONPATH=$SPARK_HOME/python/lib/py4j-*-src.zip:$PYTHONPATH:$SPARK_HOME/python/
 ```
 
