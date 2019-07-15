@@ -1,6 +1,7 @@
 Cheat Sheat
 
 ### Python, Spark setting
+
 ```bash
 # Spark home for full install
 export SPARK_HOME="/usr/local/spark/"
@@ -15,6 +16,7 @@ export PYTHONPATH=$SPARK_HOME/python/lib/py4j-*-src.zip:$PYTHONPATH:$SPARK_HOME/
 ```
 
 ### Initializing SparkSession
+
 ```python
 from pyspark.sql import SparkSession
 spark = SparkSession
@@ -28,6 +30,7 @@ sc = spark.sparkContext
 ```
 
 ### Creating DataFrames
+
 ```python
 from pyspark.sql.types import *
 
@@ -47,6 +50,7 @@ spark.createDataFrame(people, schema).show()
 ```
 
 ### From Spark Data Sources
+
 ```python
 # JSON
 df = spark.read.json("customer.json")
@@ -59,21 +63,23 @@ df3 = spark.read.load("users.parquet")
 df4 = spark.read.text("people.txt")
 ```
 
- Inspect Data  | Inspect Data |
- ------------ | ----------- |
-df.types|df.describe().show() |
-df.show()|df.columns|
-df.head()|df.count()|
-df.first()|df.distinct().count()|
-df.take(2)|df.printSchema()|
-df.schema|df.explain()|
+ | Inspect Data | Inspect Data          |
+ | ------------ | --------------------- |
+ | df.types     | df.describe().show()  |
+ | df.show()    | df.columns            |
+ | df.head()    | df.count()            |
+ | df.first()   | df.distinct().count() |
+ | df.take(2)   | df.printSchema()      |
+ | df.schema    | df.explain()          |
 
 ### Duplicate Values
+
 ```python
 df = df.dropDuplicates()
 ```
 
 ### Queries
+
 ```python
 from pyspark.sql import functions as F
 
@@ -107,6 +113,7 @@ df.select(df.age.between(22, 24))
 ```
 
 ### Add, Update, Remove Columns
+
 ```python
 # Adding Columns
 from pyspark.sql.types import *
@@ -151,6 +158,7 @@ df.coalesce(1).rdd.getNumPartitions()       # df with 1 partions
 ```
 
 ### Running SQL Queries Programmatically
+
 ```python
 # Registering DataFrames & Query as Views
 df.createOrReplaceTempView("customer")
@@ -162,6 +170,7 @@ peopledf2 = spark.sql("SELECT * FROM global_temp.people")
 ```
 
 ### Output
+
 ```python
 # Data Structures
 rdd1 = df.rdd
@@ -172,7 +181,3 @@ df.toPandas()
 df.select("firstName", "city").write.save('someName.parquet')
 df.select("firstName", "age").write.save('someName.json',format='json')
 ```
-
-
-
-
