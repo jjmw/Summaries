@@ -17,3 +17,6 @@ http://cdn.nrjaudio.fm/adwz1/fr/30605/mp3_128.mp3
 
 ### Gumbo 94.9 (Louisiana, USA)
 http://ice42.securenetsystems.net/WGUO
+
+### America's Country 77.6K (https://americascountry.us/)
+http://ais-sa2.cdnstream1.com/1976_128.mp3
