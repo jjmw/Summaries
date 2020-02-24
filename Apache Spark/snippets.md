@@ -1,5 +1,4 @@
-snippets
-
+# snippets
 
 ```python
 df_main.join(df_sub,['finr','belastingjaar'],'left').filter(df_sub["element"].isin(20,30)).drop("element").groupBy('finr','belastingjaar').sum("waarde22").show()

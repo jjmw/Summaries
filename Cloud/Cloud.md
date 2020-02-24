@@ -18,8 +18,6 @@
 - You own your own server, storage, and networking equipment within the colo facility (CapEx cost)
 - The facility owner provides power, cooling, and physical security for their customer’s server, storage, and networking equipment
 
-
-
 # Server Virtualisation
 <p align="center"> <img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Hyperviseur.png/400px-Hyperviseur.png" width="350"  title="Data Center Tiers"></p>
 

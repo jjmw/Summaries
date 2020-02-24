@@ -21,7 +21,6 @@ docker inspect <containerNameOrId> | grep '"IPAddress"' | head -n 1
 ### beakerx
 docker run -p 8888:8888 beakerx/beakerx
 
-
 ### three basic commands
 docker images <ls>
 docker container <ls> <-a>
