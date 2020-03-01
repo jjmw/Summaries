@@ -60,5 +60,5 @@ curl -XPOST --header 'Content-Type: application/json' http://localhost:9200/inde
 
 
 
-![Source](https://www.bmc.com/blogs/elasticsearch-commands/)
+[Source 1](https://www.bmc.com/blogs/elasticsearch-commands/)
 
