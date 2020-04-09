@@ -1,8 +1,9 @@
 # cUrl commands
 
 ## Create Index
-
-
+```bash
+curl -X PUT http://localhost:9200/indexName
+```
 
 ## Delete Index
 ``` bash
@@ -13,6 +14,7 @@ curl -X DELETE 'http://localhost:9200/indexName'
 ``` bash
 curl -X GET 'http://localhost:9200/_cat/indices?v'
 ```
+
 
 ## query using URL parameters
 ### Lucene syntax
@@ -28,12 +30,20 @@ curl -XGET --header 'Content-Type: application/json' http://localhost:9200/index
         "match" : { "school": "Harvard" }
     }
 }'
+
+Lookup on index id
+```bash
+curl -XGET --header 'Content-Type: application/json' http://localhost:9200/indexName/_search -d '{
+      "query" : {
+        "match" : { "_id": "37" }
+    }
+}'
 ```
 
 ## List index mapping
 ### aka schema; fieldnames and their type
 ```bash
-curl -X GET http://localhost:9200/indeName
+curl -X GET http://localhost:9200/indexName
 ```
 
 ## Add data
