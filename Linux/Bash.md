@@ -35,7 +35,10 @@ Correct way:
 ```bash
 CDPATH=.:/space:/etc:/var/lib:/usr/share:/opt
 ```
-
+### Restart terminal
+```bash
+exec "$SHELL"
+```
 ### SHLVL
 This variable tracks how deeply nested you are in the bash shell. 
 ```bash

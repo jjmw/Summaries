@@ -9,16 +9,27 @@ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 ```
 
 ```bash
-pyenv versions       # list installed python versions
-pyenv install --list # list all available versions for installation
-pyenv install 3.8    # install a version
+pyenv versions         # list installed python versions
+pyenv install --list   # list all available versions for installation
+pyenv install <python_version>    # install a version
+pyenv uninstall <python_version>   
+pyenv global <python_version>     # set version globally
+pyenv local <python_version>      # set the file .python-version with version 3.8.2
+pyenv shell <python_version>      # set PYENV_VERSION environment variable as current
+pyenv virtualenv <python_version> <environment_name>    # create environment
+
+pyenv local <environment_name>    # activate enviroment
+pyenv activate <environment_name> # the same as above
+
+pyenv deactivate
 ```
 
 ## Using pipenv
 
 ```bash
 cd project_directory
-pipenv --python 3.8 install     ## install python 3.8 for in this dir
+pipenv --python <python_version> install     ## install python in this dir
+
 ```
 
 ### Pipfile
