@@ -1,5 +1,10 @@
 # cUrl commands
 
+## Test connection and ES correctly running
+```bash
+    curl -I -XHEAD localhost:9200
+```
+
 ## Create Index
 ```bash
 curl -X PUT http://localhost:9200/indexName
