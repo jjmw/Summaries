@@ -72,6 +72,10 @@ curl -XPOST --header 'Content-Type: application/json' http://localhost:9200/inde
 }'
 ```
 
+### load a dataset
+```bash
+curl -u elastic -H 'Content-Type: application/x-ndjson' -XPOST '<host>:<port>/bank/_bulk?pretty' --data-binary @accounts.json
+```
 
 
 
