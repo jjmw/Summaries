@@ -65,3 +65,30 @@ merged into the existing mappings of the _doc type
 curl -XGET http://localhost:9200/catalog/_doc/1?pretty=true
 ```
 
+### Standard tokenizer
+```http
+POST _analyze
+  {"tokenizer": "standard",  "text": "Tokenizer breaks characters into tokens!"
+}
+```
+
+### analyzer example with english stopwords
+```http
+PUT index_standard_analyzer_english_stopwords
+{ "settings": {
+       "analysis": {
+         "analyzer": {
+           "std": {
+             "type": "standard",
+             "stopwords": "_english_"         }       
+           }
+          }
+        },
+        "mappings": {
+          "properties": {
+            "my_text": {         "type": "text",         "analyzer": "std"
+            }
+          }
+        }
+}
+```
