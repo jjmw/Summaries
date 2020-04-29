@@ -92,3 +92,4 @@ PUT index_standard_analyzer_english_stopwords
         }
 }
 ```
+
