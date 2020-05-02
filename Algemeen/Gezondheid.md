@@ -33,3 +33,7 @@ sodium hydroxymethylglycinate
 
 
 [Algemeen](https://www.huidinfo.nl/)
+
+
+Resveratrol
+[source wikipedia](https://nl.wikipedia.org/wiki/Resveratrol)
