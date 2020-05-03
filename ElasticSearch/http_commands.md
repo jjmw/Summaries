@@ -6,6 +6,8 @@
     GET /_cat/indices
     GET /<index>/_mapping <!-- get all mappings of index catalog -->
     GET /<index>/_doc/<id>
+
+    GET /_cat/health?v     <!-- info about cluster and nodes -->
 ```
 ### Searches
 ```http

@@ -1,5 +1,8 @@
 - docker version --format '{{.Server.Version}}'
 - docker rm $(docker ps -a -q) // remove all stopped containers
+- docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")    # Untagged images
+
+
 
 ### Docker lifecycle
 

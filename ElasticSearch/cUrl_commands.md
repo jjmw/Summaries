@@ -1,5 +1,18 @@
 # cUrl commands
 
+curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'
+
+| Variables  | Description |
+| :--------- | :---------- |
+| <VERB>     | The appropriate HTTP method or verb. For example, GET, POST, PUT, HEAD, or DELETE |
+| <PROTOCOL> | Either http or https. Use the latter if you have an HTTPS proxy in front of Elasticsearch or you use Elasticsearch security features to encrypt HTTP communications | 
+| <HOST>     | The hostname of any node in your Elasticsearch cluster. Alternatively, use localhost for a node on your local machine | 
+| <PORT>     | The port running the Elasticsearch HTTP service, which defaults to 9200 | 
+| <PATH>     | The API endpoint, which can contain multiple components, such as _cluster/stats or _nodes/stats/jvm. 
+| <QUERY_STRING> | Any optional query-string parameters. For example, ?pretty will pretty-print the JSON response to make it easier to read | 
+| <BODY>     | A JSON-encoded request body (if necessary) | 
+
+
 ## Test connection and ES correctly running
 ```bash
     curl -I -XHEAD localhost:9200
