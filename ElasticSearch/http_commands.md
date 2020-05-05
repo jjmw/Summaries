@@ -2,7 +2,7 @@
 
 ### list indexes
 ```http
-    GET /_cat/indices?v   <!-- all columns -->
+    GET /_cat/indices?v   <!-- index with all columns -->
     GET /_cat/indices
     GET /<index>/_mapping <!-- get all mappings of index catalog -->
     GET /<index>/_doc/<id>
@@ -11,8 +11,30 @@
 ```
 ### Searches
 ```http
-  GET /<index>,<index>/<type>/_search
+  GET /<index>,<index>/<type>/_search    <!-- Searches over all indices on types -->
+  GET _search                            <!-- Searches every index on all types -->
 ```
+
+### Most basic query; it returns all the content and with the score of 1.0 for every object.
+```http
+GET /<index>/_search
+{
+   "query":{
+      "match_all":{}
+   }
+}
+```
+
+### exanple
+```http
+GET /customer/_search
+{
+   "query": {                               <!-- when search query is first level always -->
+      "match" : { "name" : "John Doe" }
+   }
+}
+```
+
 
 ### Index API CRUD operations
 ```http
@@ -28,6 +50,7 @@
 ```
 
 ### Creating an **new** index
+## Elasticsearch Query DSL
 ```http
   PUT /catalog 
   {

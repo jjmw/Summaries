@@ -16,7 +16,9 @@ docker image rm  dd9acebe0b4d
 **Dockerfile** defines what goes on in the environment inside your container.
 
 Let’s check the logs and see what the daemon container is doing right now:
-docker logs -f daemon
+```bash
+docker logs -f <name daemon>
+```
 
 ### docker ipaddress or running container
 docker inspect <containerNameOrId> | grep '"IPAddress"' | head -n 1
