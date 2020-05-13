@@ -17,7 +17,7 @@ Querying documents can be done by specifying __filters over exact values__. Whet
 ---
 ## Analyzed search 
 
-__Analyzed text__ is text data like  roduct_description or email_body
+__Analyzed text__ is text data like  product_description or email_body
 - Querying documents by searching analyzed text returns results based on __relevance__
 - Highly complex operation and involves different __analyzer packages__ depending on the type of text data
 - -  The default analyzer package is the _standard analyzer_ which splits text by word boundaries, lowercases and removes punctuation
@@ -31,7 +31,7 @@ Elasticsearch queries are comprised of one or many __query clauses__. Query clau
 
 ```json
 {
-  QUERY_CLAUSE: {
+  QUERY_CLAUSE: {         // match, match_all, multi_match, term, terms, exists, missing, range, bool
     ARGUMENT: VALUE,
     ARGUMENT: VALUE,...
   }
@@ -86,28 +86,47 @@ Returns all documemts
 The term and terms query clauses are used to filter by a exact value fields by single or multiple values, respectively. In the case of multiple values, the logical connection is OR.
 
 ```json
-{ "term": { "tag": "math" }}
-{ "terms": { "tag": ["math", "statistics"] }}
+{
+  "query": {
+    "term": { "tag": "math" }
+    }
+}
+
+{
+  "query": {
+    "term": { "tag": ["math", "second"] }
+    }
+}
+
+
+
 ```
 
 ##  Multi Match Query Clause
 Is run across multiple fields instead of just one
 
 ```json
-{
+{ "query": {
   "multi_match": {
-    "query": "probability theory",
-    "fields": ["title", "body"]
+    "query": "probability theory",    // value
+    "fields": ["title^3", "*body"],    // fields, with wildcard *
+                                      // no fields == *
+                                      // title 3* more important
+    "type":       "best_fields",
+    }
   }
 }
 ```
+[Other types](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#multi-match-types)
 ## Exists and Missing Filters Query Clause
 - The exists filter checks that documents have a value at a specified field
 ```json
 {
-  "exists" : {
-    "field" : "title"
-  }
+  "query": {
+   "exists": {
+     "field": "*installCount"   // also with wildcards
+   }
+}
 }
 ```
 - The missing filter checks that documents do not have have a value at a specified field
@@ -131,6 +150,28 @@ Number and date fields in ranges, using the operators gt gte lt lte
        "gte": "01/01/2012",
        "lte": "2013",
        "format": "dd/MM/yyyy||yyyy"
+    }
+  }
+}
+```
+
+## Query in filter context
+### No scores are calculated: yes or no
+The __query__ parameter indicates query context.
+The __bool__ and two __match__ clauses are used in query context, which means that they are used to score how well each document matches.
+The __filter__ parameter indicates  	__*filter context*__. Its term and range clauses are used in filter context. They will filter out documents which do not match, but they will	__*not affect the score*__ for matching documents.
+```json
+GET /.kibana/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {"type" : "ui-metric"}},
+        {"match": {"ui-metric.count" : "1"}}
+      ],
+      "filter": [
+        {"range": {"updated_at": {"gte": "2020-04-01"}}}
+      ]
     }
   }
 }

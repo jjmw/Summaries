@@ -20,3 +20,10 @@ edit "prepend domain-name-servers" for DNS servers
 
 ### Monitor wifi
 wavemon
+
+### available wifi networks
+nmcli connection show
+
+### which DNS server in use:
+( nmcli dev list || nmcli dev show ) 2>/dev/null | grep DNS
+nm-tool | grep DNS
