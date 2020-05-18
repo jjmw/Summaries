@@ -1,27 +1,129 @@
 # Elasticsearch Query DSL
 
 ### Queries can be classified into three types
+
 1. Filtering by exact values
 2. Searching on analyzed text
 3. A combination of the two
 
 Every __document field__ can be classified:
+
 - either as an exact values
 - analyzed text (also called full text)
 
----
+## Exact values
 
-__Exact values__ are fields like user_id, date, email_addresses
+are fields like user_id, date, email_addresses
 Querying documents can be done by specifying __filters over exact values__. Whether the document gets returned is a __binary__ yes or no
 
 ---
+
 ## Analyzed search 
 
 __Analyzed text__ is text data like  product_description or email_body
-- Querying documents by searching analyzed text returns results based on __relevance__
+
+- Querying documents by searching analyzed text returns results based on __relevance__  (score)
 - Highly complex operation and involves different __analyzer packages__ depending on the type of text data
 - -  The default analyzer package is the _standard analyzer_ which splits text by word boundaries, lowercases and removes punctuation
 - less performant than just filtering by exact values
+
+
+
+## Two type of Query DSL:
+
+1. Leaf query clause
+
+   Look for a particulair field, such as **match**, **term** or **range**.
+
+2. Compound query clause
+
+   wrap other leaf(s) or compound queries and are used to combine multiple queries in a logical fashion (**bool** or **dis_max**)
+
+   Or alter their behaviour (such as **constant_score**)
+
+
+
+Queries behave different: **query context** or **filter context** (see below)
+
+
+
+## Expensive queries
+
+1. Lineair scans
+
+   - script queries
+2. high up-front
+   - fussie queries
+    - reqexp queries
+    - prefix  queries without index_prefixes
+    - wildcard  queries
+    - range  queries on text and keyword fields
+3. joinig queries
+
+4. Queries on deprecated geo shapes
+
+5. high per-document cost
+
+   - script score queries
+   - percolate queries
+
+The execution of such queries can be prevented by setting the value of the `search.allow_expensive_queries` setting to `false` (defaults to `true`).
+
+
+
+## Scoring queries
+
+By default, Elasticsearch sorts matching search results by **relevance score**, which measures how well each document matches a query.
+
+But depends if the query is executed in **query** or **filter** context
+
+
+
+## => Query context
+
+“*How well does this document match this query clause?*” The relevance is stored in the **_score** meta_field
+
+Query context is in effect whenever query clause is passed to the query parameter.
+
+
+
+## => Filter context
+
+“*Does this document match this query clause?*” Answer is a true of false. No score is calculated.
+
+Mostly used for filtering structured data, eq
+
+- Does this timestamp fall in range....
+- is the status field set to "text value"
+
+Frequently used filters will be cached
+
+Filter contect in effect when filter clause is used
+
+- such as filter or must_not parameters in bool query
+- filter parameter ins constant_score query
+- filter aggregation
+
+Example
+```json
+GET /_search
+{
+  "query": {    <= query context
+    "bool": { 	<= query context, together with matches: how well they match documents
+      "must": [
+        { "match": { "title":   "Search"        }},
+        { "match": { "content": "Elasticsearch" }}
+      ],
+      "filter": [ 	<= filter context
+        { "term":  { "status": "published" }},
+        { "range": { "publish_date": { "gte": "2015-01-01" }}}
+      ]
+    }
+  }
+}
+```
+
+
 
 ---
 
@@ -63,10 +165,40 @@ Query clauses can be __repeatedly nested__ inside other query clauses
 }
 ```
 
+
+
+## Compound queries
+
+- bool query
+
+  multiple leaf or compound query clauses 
+
+  must, should => scores combined
+
+  must_not, filter => in context filter
+
+- boosting query
+
+- constant_score query
+
+- dis_max query
+
+- function_score query
+
+
+
+
+
+
+
+
+
 ## Match Query Clause
+
 Match query clause is the most generic and commonly used query clause:
 - run on a analyzed text field, it performs an analyzed search on the text
 - run on an exact value field, it performs a filter
+- calculates the score
 
 example:
 ```json
@@ -83,7 +215,7 @@ Returns all documemts
 ```
 
 ## Term/Terms Query Clause
-The term and terms query clauses are used to filter by a exact value fields by single or multiple values, respectively. In the case of multiple values, the logical connection is OR.
+The term and terms query clauses are used to **filter** by a exact value fields by single or multiple values, respectively. In the case of multiple values, the logical connection is OR.
 
 ```json
 {
@@ -160,6 +292,8 @@ Number and date fields in ranges, using the operators gt gte lt lte
 The __query__ parameter indicates query context.
 The __bool__ and two __match__ clauses are used in query context, which means that they are used to score how well each document matches.
 The __filter__ parameter indicates  	__*filter context*__. Its term and range clauses are used in filter context. They will filter out documents which do not match, but they will	__*not affect the score*__ for matching documents.
+__Must__ clause is not required (score == 0.0)
+
 ```json
 GET /.kibana/_search
 {
