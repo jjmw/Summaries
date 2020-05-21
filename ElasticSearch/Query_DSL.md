@@ -89,7 +89,7 @@ Query context is in effect whenever query clause is passed to the query paramete
 
 ## => Filter context
 
-“*Does this document match this query clause?*” Answer is a true of false. No score is calculated.
+“*Does this document match this query clause?*” Answer is a true of false. No score is calculated == scoring of all documents is 0.
 
 Mostly used for filtering structured data, eq
 
@@ -98,7 +98,7 @@ Mostly used for filtering structured data, eq
 
 Frequently used filters will be cached
 
-Filter contect in effect when filter clause is used
+Filter context in effect when filter clause is used
 
 - such as filter or must_not parameters in bool query
 - filter parameter ins constant_score query
@@ -173,9 +173,46 @@ Query clauses can be __repeatedly nested__ inside other query clauses
 
   multiple leaf or compound query clauses 
 
-  must, should => scores combined
+  must, should => scores combined (), contributes to score
 
   must_not, filter => in context filter
+
+  **must** means: The clause (query) must appear in matching documents. These clauses must match, like logical **AND**.
+
+  **should** means: At least one of these clauses must match, like logical **OR**.
+
+  You can use the `minimum_should_match` parameter to specify the number or percentage of `should` clauses returned documents *must* match.
+
+  If the `bool` query includes at least one `should` clause and no `must` or `filter` clauses, the default value is `1`. Otherwise, the default value is `0`
+
+  ```json
+  POST _search
+  {
+    "query": {
+      "bool" : {
+        "must" : {
+          "term" : { "user" : "kimchy" }
+        },
+        "filter": {
+          "term" : { "tag" : "tech" }
+        },
+        "must_not" : {
+          "range" : {
+            "age" : { "gte" : 10, "lte" : 20 }
+          }
+        },
+        "should" : [
+          { "term" : { "tag" : "wow" } },
+          { "term" : { "tag" : "elasticsearch" } }
+        ],
+        "minimum_should_match" : 1,
+        "boost" : 1.0
+      }
+    }
+  }
+  ```
+
+  
 
 - boosting query
 
