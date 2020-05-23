@@ -19,3 +19,6 @@ youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merg
 ```
 
 [More info](https://askubuntu.com/questions/486297/how-to-select-video-quality-from-youtube-dl)
+
+
+ffmpeg -v 5 -y -i input.m4a -acodec libmp3lame -ac 2 -ab 192k output.mp3

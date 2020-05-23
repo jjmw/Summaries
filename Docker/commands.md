@@ -1,3 +1,5 @@
+# Docker
+
 - docker version --format '{{.Server.Version}}'
 - docker rm $(docker ps -a -q) // remove all stopped containers
 - docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")    # Untagged images
@@ -107,6 +109,7 @@ services:
 
 
 
+[How To Remove Docker Images, Containers, and Volumes](<https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes>)
 
 
 
