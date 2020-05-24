@@ -37,6 +37,9 @@
 ```
 
 ### create a new index with mapping (example)
+- Can not change the number of shards after index iz created
+- re-index is possible (worstcase)
+- replicas can be added later
 
 ```json
 PUT /items

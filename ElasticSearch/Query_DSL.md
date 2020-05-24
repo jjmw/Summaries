@@ -1,7 +1,6 @@
 # Elasticsearch Query DSL
 
 ### Queries can be classified into three types
-
 1. Filtering by exact values
 2. Searching on analyzed text
 3. A combination of the two
@@ -12,14 +11,11 @@ Every __document field__ can be classified:
 - analyzed text (also called full text)
 
 ## Exact values
-
 are fields like user_id, date, email_addresses
 Querying documents can be done by specifying __filters over exact values__. Whether the document gets returned is a __binary__ yes or no
-
 ---
 
 ## Analyzed search 
-
 __Analyzed text__ is text data like  product_description or email_body
 
 - Querying documents by searching analyzed text returns results based on __relevance__  (score)
@@ -30,7 +26,6 @@ __Analyzed text__ is text data like  product_description or email_body
 
 
 ## Two type of Query DSL:
-
 1. Leaf query clause
 
    Look for a particulair field, such as **match**, **term** or **range**.
@@ -42,9 +37,7 @@ __Analyzed text__ is text data like  product_description or email_body
    Or alter their behaviour (such as **constant_score**)
 
 
-
 Queries behave different: **query context** or **filter context** (see below)
-
 
 
 ## Expensive queries
@@ -70,13 +63,16 @@ Queries behave different: **query context** or **filter context** (see below)
 The execution of such queries can be prevented by setting the value of the `search.allow_expensive_queries` setting to `false` (defaults to `true`).
 
 
+| Queries         | filters  |
+| --------------- | -------- | 
+| Fuzzy, scoring  | Boolean  |
+| Slower          | faster   |
+| not cachable    | Cachable |
+
 
 ## Scoring queries
-
 By default, Elasticsearch sorts matching search results by **relevance score**, which measures how well each document matches a query.
-
 But depends if the query is executed in **query** or **filter** context
-
 
 
 ## => Query context
@@ -225,11 +221,6 @@ Query clauses can be __repeatedly nested__ inside other query clauses
 
 
 
-
-
-
-
-
 ## Match Query Clause
 
 Match query clause is the most generic and commonly used query clause:
@@ -366,7 +357,6 @@ The three supported boolean operators are __must__ (and) __must_not__ (not) and 
 ```
 
 ## Combining Analyzed Search With Filters
-
 Example: query to find all posts by performing an analyzed search for “Probability Theory” but we only want posts with 20 or more upvotes and not those with that tag “frequentist”.
 ```json
 {
