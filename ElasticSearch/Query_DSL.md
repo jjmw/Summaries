@@ -36,12 +36,7 @@ __Analyzed text__ is text data like  product_description or email_body
 
    Or alter their behaviour (such as **constant_score**)
 
-
-Queries behave different: **query context** or **filter context** (see below)
-
-
 ## Expensive queries
-
 1. Lineair scans
 
    - script queries
@@ -63,11 +58,13 @@ Queries behave different: **query context** or **filter context** (see below)
 The execution of such queries can be prevented by setting the value of the `search.allow_expensive_queries` setting to `false` (defaults to `true`).
 
 
+Queries behave different: **query context** or **filter context**
+
 | Queries         | filters  |
 | --------------- | -------- | 
 | Fuzzy, scoring  | Boolean  |
-| Slower          | faster   |
-| not cachable    | Cachable |
+| Slower          | Faster   |
+| not Cachable    | Cachable |
 
 
 ## Scoring queries
@@ -125,7 +122,7 @@ GET /_search
 
 ## The Query DSL
 
-Elasticsearch queries are comprised of one or many __query clauses__. Query clauses can be combined to create other query clauses, called __compound query clauses__. All query clauses have either one of these two formats:
+Elasticsearch queries are comprised of one or many __Leaf query clauses__. Query clauses can be combined to create other query clauses, called __compound query clauses__. All query clauses have either one of these two formats:
 
 ```json
 {
@@ -161,11 +158,14 @@ Query clauses can be __repeatedly nested__ inside other query clauses
 }
 ```
 
+## Leaf querie clauses
+look for a partiqulair value in a particulair field, such as match, term, range queries/
+These queries can be used by themselves.
 
 
 ## Compound queries
 
-- bool query
+- bool/dis_max query
 
   multiple leaf or compound query clauses 
 
