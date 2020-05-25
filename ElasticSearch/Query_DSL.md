@@ -23,22 +23,8 @@ __Analyzed text__ is text data like  product_description or email_body
 - -  The default analyzer package is the _standard analyzer_ which splits text by word boundaries, lowercases and removes punctuation
 - less performant than just filtering by exact values
 
-
-
-## Two type of Query DSL:
-1. Leaf query clause
-
-   Look for a particulair field, such as **match**, **term** or **range**.
-
-2. Compound query clause
-
-   wrap other leaf(s) or compound queries and are used to combine multiple queries in a logical fashion (**bool** or **dis_max**)
-
-   Or alter their behaviour (such as **constant_score**)
-
 ## Expensive queries
 1. Lineair scans
-
    - script queries
 2. high up-front
    - fussie queries
@@ -68,20 +54,16 @@ Queries behave different: **query context** or **filter context**
 
 
 ## Scoring queries
-By default, Elasticsearch sorts matching search results by **relevance score**, which measures how well each document matches a query.
-But depends if the query is executed in **query** or **filter** context
+By default, Elasticsearch sorts matching search results by **relevance score**, which measures how well each document matches a query. But depends if the query is executed in **query** or **filter** context
 
 
 ## => Query context
-
 “*How well does this document match this query clause?*” The relevance is stored in the **_score** meta_field
-
 Query context is in effect whenever query clause is passed to the query parameter.
 
 
 
 ## => Filter context
-
 “*Does this document match this query clause?*” Answer is a true of false. No score is calculated == scoring of all documents is 0.
 
 Mostly used for filtering structured data, eq
@@ -116,9 +98,11 @@ GET /_search
 }
 ```
 
-
-
 ---
+
+### Difference term vs match
+- match : query aplies the same analyzer to the search at the time the data was stored
+- term  : does not apply any analyzer, so will look for exactly what is stored in the inverted index
 
 ## The Query DSL
 
@@ -158,24 +142,29 @@ Query clauses can be __repeatedly nested__ inside other query clauses
 }
 ```
 
-## Leaf querie clauses
-look for a partiqulair value in a particulair field, such as match, term, range queries/
-These queries can be used by themselves.
+## Two type of Query DSL (Leaf and Compound)
 
+### Leaf query clause
+Look for a partiqulair value in a particulair field, such as match, term, range queries/
+These queries can be used by themselves. Use such as **match**, **term** or **range**.
 
-## Compound queries
+### Compound query clause
+wrap other leaf(s) or compound queries and are used to combine multiple queries in a logical fashion (**bool** or **dis_max**)
 
-- bool/dis_max query
+Or alter their behaviour (such as **constant_score**)
+
+- bool => must, must-not, should, filter, minimum_should_match
 
   multiple leaf or compound query clauses 
 
-  must, should => scores combined (), contributes to score
+  **must**, **should** => scores combined (), contributes to score
 
-  must_not, filter => in context filter
+  **must_not**, **filter** => in context filter
 
-  **must** means: The clause (query) must appear in matching documents. These clauses must match, like logical **AND**.
 
-  **should** means: At least one of these clauses must match, like logical **OR**.
+  **must** ==> like logical **AND**.
+
+  **should** ==> like logical **OR**.
 
   You can use the `minimum_should_match` parameter to specify the number or percentage of `should` clauses returned documents *must* match.
 
@@ -216,7 +205,7 @@ These queries can be used by themselves.
 
 - dis_max query
 
-- function_score query
+- function_score query  
 
 
 
