@@ -135,8 +135,270 @@ GET /shakespeare/_search
   }
 }
 
-
 GET /shakespeare/_mapping
+
+
+GET /shakespeare/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"term": {
+          "speaker": {
+            "value": "KING HENRY IV"
+          }
+        }}
+      ],
+      "filter": [
+        {"term": {
+          "speech_number": "1"
+        }}
+      ]
+    }
+  }
+}
+
+
+GET /shakespeare/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {
+          "speaker": "KING HENRY IV"
+        }}
+      ],
+      "should": [
+        {"term": {
+          "line_number": {
+            "value": "1.1.2"
+          }
+        }},
+        {"term": {
+          "speech_number": {
+            "value": "2"
+          }
+        }}
+      ],
+      "minimum_should_match": 1, 
+      "filter": [
+        {"term": {
+          "play_name": "Henry IV"
+        }}
+      ]
+  }
+      
+    }
+  }
+
+
+GET /shakespeare/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "wildcard": {
+            "line_number": {
+              "value": "1.1.?"
+            }
+          }
+        },
+        {
+          "range": {
+            "line_id": {
+              "gte": 1,
+              "lte": 40
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 2
+    }
+  }
+}
+
+GET /shakespeare/_search
+{
+  "query": {
+    "query_string": {
+      "fields": ["speaker","play_name"],
+      "query": "KING HENRY IV",
+      "default_operator": "OR"
+    }
+  }
+}
+
+
+  PUT /shakespeare/_mapping
+  {
+    "properties": {
+        "spreker_1": {
+           "type": "keyword" 
+         }
+     }
+  }
+
+
+DELETE /test_analyzer
+
+
+
+PUT /test_analyzer
+{
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+        "split_on_words": {
+          "type" : "pattern",
+          "pattern": "\\W|_|[a-c]",
+          "lowercase": true
+        }
+      }, 
+      "analyzer": {
+        "rebuild_pattern": {
+          "tokenizer" : "split_on_words",
+          "filter": ["lowercase"]
+           
+        }
+      }
+    }
+  }
+}
+  
+  
+  "mappings": {
+      "properties": {
+        "spreker_1": {
+          "type": "keyword"
+
+        }
+      }
+    }
+}
+
+GET /test_analyzer/_analyze
+{
+  "analyzer": "rebuild_pattern",
+  "field": "spreker_1",
+  "text": ["Whsat is_the dd@this 1 builder's"]
+}
+
+DELETE /developer
+
+PUT /developer
+{
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "skills": {
+        "type": "nested",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "level": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+
+POST /developer/_doc/101
+{
+  "name": "john Doe",
+  "skills": [
+    {
+      "language": "ruby",
+      "level": "expert"
+    },
+    {
+      "language": "javascript",
+      "level": "beginner"
+    }
+  ]
+}
+
+
+GET /developer/_search
+{
+  "query": {
+    "nested": {
+      "path": "skills",
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "match": {
+                "skills.language": "ruby"
+              }
+            },
+            {
+              "match": {
+                "skills.level": "expert"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+
+
+PUT /developer1
+{
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "skills": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "level": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+
+POST /developer1/_doc/101
+{
+  "name": "john Doe",
+  "skills": [
+    {
+      "language": "ruby",
+      "level": "expert"
+    },
+    {
+      "language": "javascript",
+      "level": "beginner"
+    }
+  ]
+}
+
+
+
+GET /developer1/_search
+{
+  "query": {
+    "match": {
+      "skills.language": "ruby"
+    }
+  }
+}
+
 
 
 ```

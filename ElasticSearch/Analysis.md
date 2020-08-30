@@ -30,11 +30,19 @@ Example
 	- no lowercase transformation
 	- takes terms as they are
 	- keeps special characters
-4. own analyzer (see below)
+4. keyword
+	- no configuration
+	- takes all text as one keyword
+5. stop
+	- stopword, stopword_path
+6. pattern
+	- stopword, stopword_path, pattern, lowercase
+	- regular expression
+7. custom
+	- tokenizer, char_filter, filter
 
 
-
-### Example
+### Example with standard analyzer
 ```json
 PUT /test_analyzer
 {
@@ -70,3 +78,27 @@ GET /test_analyzer/_analyze
 ```
 
 
+### without mapping; pattern analyzer
+```json
+PUT /test_analyzer
+{
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+        "split_on_words": {
+          "type" : "pattern",
+          "pattern": "\\W|_|[a-c]",   <-==== seperator whitespace or _ or chars a,b,c
+          "lowercase": true
+        }
+      }, 
+      "analyzer": {
+        "rebuild_pattern": {
+          "tokenizer" : "split_on_words",
+          "filter": ["lowercase"]
+           
+        }
+      }
+    }
+  }
+}
+```

@@ -3,12 +3,11 @@
 # Indexes
 
 
-
 ### Create index without mapping
 
 ```json
 {
-	PUT items
+	PUT <index>
 }
 ```
 
@@ -16,11 +15,9 @@
 
 ```json
 {
-	DELETE items
+	DELETE <index>
 }
 ```
-
-
 
 ### Mapping is the process of defining how a document, and the fields it contains, are stored and indexed.
 
@@ -40,6 +37,12 @@
 - Can not change the number of shards after index iz created
 - re-index is possible (worstcase)
 - replicas can be added later
+
+
+### Types of fields
+- object (may contain inner objects; json docs are hierarchocal in nature)
+- nested
+
 
 ```json
 PUT /items
@@ -98,7 +101,7 @@ PUT /items
 
 ### Adding a type mapping in an existing index
 merged into the existing mappings of the _doc type
-```http
+```json
   PUT /<index>/_mapping
   {
     "properties": {
@@ -108,3 +111,86 @@ merged into the existing mappings of the _doc type
      }
   }
 ```
+
+
+
+
+### Create NESTED mapping, insert data and query
+```json
+DELETE /developer
+
+PUT /developer
+{
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text"
+      },
+      "skills": {
+        "type": "nested",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "level": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+
+POST /developer/_doc/101
+{
+  "name": "john Doe",
+  "skills": [
+    {
+      "language": "ruby",
+      "level": "expert"
+    },
+    {
+      "language": "javascript",
+      "level": "beginner"
+    }
+  ]
+}
+
+
+GET /developer/_search
+{
+  "query": {
+    "nested": {
+      "path": "skills",
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "match": {
+                "skills.language": "ruby"
+              }
+            },
+            {
+              "match": {
+                "skills.level": "expert"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+
+### Create OBJECT mapping, insert data and query
+
+
+
+
+

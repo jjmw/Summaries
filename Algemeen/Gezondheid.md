@@ -37,3 +37,12 @@ sodium hydroxymethylglycinate
 
 Resveratrol
 [source wikipedia](https://nl.wikipedia.org/wiki/Resveratrol)
+
+Zit in:
+Blauwe bessen
+Pruimen
+Veenbessen
+Druiven
+Granaatappel
+Frambozen
+Supplementen
