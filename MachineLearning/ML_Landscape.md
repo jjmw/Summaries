@@ -164,6 +164,8 @@ Dev + test set have to come from the SAME distribution (random shuffle data)
 1. define dev set + metric. Quickly iterate
     idea -> code -> experiment
 
-    training set: 98% of data
-    dev set: 1%
-    test set: 1%  (reason: big data. Data set is eg > 1 million)
+    | Set | percentage of data |
+    | :--- | --: |
+    | training | 98 |
+    | dev | 1 |
+    | test |1  |
