@@ -2,7 +2,7 @@
 
 ## What is ML
 
-Science of programming computers so they can learn from data
+Science of programming computers so they can learn from data, instead of having explicite code rules
 
 Data examples are called **training sets**. Each training example is called a **training instance**
 Performance is measured in **accuracy**
@@ -101,16 +101,13 @@ ML Systems how they generalize. Needs to prform well on new data!
     - learn examples by heart, then generalize to new cases by using similarity measures to compare.
 2. **Model-based learning**
     - build model of examples and then use the model to make predictions
-    - Use model selection to select an appropiate model and fully specifying its architecture.
+    - Use model selection to select an appropiate model and fully specifying its architecture (incl tune parameters)
 
 Inference: make predictions on new data.
-
 
 ## Main challenges of ML
 
 "Bad algorithme" and "bad data"
-
-### Bad data
 
 1. Insufficient quantity of training data
     - Not always easy and/or cheap to get extra training data
@@ -145,6 +142,28 @@ Inference: make predictions on new data.
         - select more powerful model, with more parameters
         - improve feature engineering tasks
         - reduce contrains on the model (eg regularisation)
-        
 
+## Testing and validation
 
+Training set and test set, relate to each other 80-20% to 99-1%; depending the absolute size total data set.
+Error rate in test set => generalization error
+Training error low, but generalization error high => overfitting
+
+### Hyperparameter tuning an model section
+
+Holdout validation: keep part of the training set (= validation/development set) to validate several candidata models and select the best. Work mostly very well, except when the validation set is too small.
+    Solution: cross-validation => using many small validation sets and validate each model per validation set.(drawback: trainingtime is multiplied by number of validation sets)
+
+### Data Mismatch
+
+Most important rule: validation set and test set must be as representative as possible of the data used in production
+Training set => to train model
+Test set => evaluate after happy with the dev set
+Dev + test set have to come from the SAME distribution (random shuffle data)
+
+1. define dev set + metric. Quickly iterate
+    idea -> code -> experiment
+
+    training set: 98% of data
+    dev set: 1%
+    test set: 1%  (reason: big data. Data set is eg > 1 million)
