@@ -25,7 +25,7 @@ docker images <ls>
 docker container <ls> <-a>
 docker run <name>
 
-### run tenserflow and jupyter at port 8888
+### run tensorflow and jupyter at port 8888
 docker run --rm -v $(pwd):/tf/convolutional -it -p 8888:8888 tensorflow/tensorflow:latest-jupyter
 
 ### run iterative python program directly
