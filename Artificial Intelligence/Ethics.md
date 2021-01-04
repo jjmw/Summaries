@@ -9,7 +9,7 @@ Machine learning (ML) through neural networks is advancing rapidly for three rea
 All three of these trends are centralizing of power, and “With great power comes great responsibility”
 
 ## Sixteen Challenges
-1. Technical Safety
+1. __**Technical Safety**__
    Will AI systems work as they are promised or will they fail? If and when they fail, what will be the results of those failures? And if we are dependent upon them, will we be able to survive without them?
    Might legally reduce a manufacturer’s responsibility in terms and contracts => nethical scheme to avoid legitimate responsibility.
 2. Transparency and Privacy
