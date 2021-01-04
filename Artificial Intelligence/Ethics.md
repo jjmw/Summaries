@@ -53,7 +53,7 @@ All three of these trends are centralizing of power, and “With great power com
     AI can exploit numerous human desires and weaknesses including purpose-seeking, gambling, greed, libido, violence, and so on. Addiction enslaves us and wastes our time when we could be doing something worthwhile. It is not the AIs that choose to treat people this way, it is other people.
 15. **Isolation and Loneliness**
     One might think that “social” media, smartphones, and AI could help, but in fact they are major causes of loneliness since people are facing screens instead of each other. What does help are strong in-person relationships, precisely the relationships that are being pushed out by addictive (often AI-powered) technology. Loneliness can be helped by dropping devices and building quality in-person relationships. In other words: caring.
-16. Effects on the Human Spirit
+16. **Effects on the Human Spirit**
     By externalizing our intelligence and improving it beyond human intelligence, are we making ourselves second-class beings to our own creations?
 
 [Artificial Intelligence and Ethics: Sixteen Challenges and Opportunities](https://www.scu.edu/ethics/all-about-ethics/artificial-intelligence-and-ethics-sixteen-challenges-and-opportunities/)
