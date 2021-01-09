@@ -6,7 +6,7 @@
 ### list and remove images
 - docker images -a
 - docker rmi $(docker images -a -q)
-
+  
 ### Docker lifecycle
 1. [docker create [OPTIONS] IMAGE [COMMAND] [ARG...]](https://docs.docker.com/engine/reference/commandline/create/) create but doesn't start
 2. [docker rename CONTAINER NEW_NAME](https://docs.docker.com/engine/reference/commandline/rename/)
@@ -49,7 +49,7 @@ CMD python3 /src/hello-world.py
 ```
 
 ### docker networks
-Usage:	docker network COMMAND
+Usage: docker network COMMAND
 
 Commands:
   connect     Connect a container to a network
