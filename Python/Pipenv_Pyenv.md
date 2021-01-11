@@ -26,6 +26,12 @@ pyenv deactivate
 
 ## Using pipenv
 
+### Install
+
+pip install --user --upgrade pipenv
+
+### Usage
+
 ```bash
 cd project_directory
 pipenv --python <python_version> install     ## install python in this dir
