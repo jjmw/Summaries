@@ -18,3 +18,7 @@ find /usr/lib/modules -name nvidia.ko
 ## Settings
 
 nvidia-settings
+
+## monitoring nvidia
+
+https://github.com/fbcotter/py3nvml
