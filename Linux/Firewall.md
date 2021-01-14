@@ -6,5 +6,4 @@ sudo ufw disable
 
 sudo ufw --help
 
-
-gufw 
+gufw

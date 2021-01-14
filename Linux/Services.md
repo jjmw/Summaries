@@ -1,15 +1,17 @@
 # Services
 
+## list all services
 
-### list all services
 service --status-all
 
-### start - stop - pauze services
-sudo service <package name> <start | off | pauze | .... >
+## start - stop - pauze services
 
+sudo service <package name> <start | off | pauze | ....
 
-### List services:
+## List services
+
 systemctl list-unit-files
 
-### Statup time:
+## Statup time
+
 systemd-analyze blame

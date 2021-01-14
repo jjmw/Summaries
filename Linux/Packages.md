@@ -1,72 +1,91 @@
-Remve unused
+# Remove unused
 
+## install
 
-### install 
 sudo apt install deborphan
 
-### run terminal version
+## run terminal version
+
 deborphan
 
-### To remove the orphaned packages, run:
+## To remove the orphaned packages, run:
+
 sudo orphaner
 
-### graphical version
+## graphical version
+
 sudo apt install gtkorphan
 sudo gtkorphan
 
-### Alternative 
+## Alternative
+
 sudo apt autoclean && sudo apt autoremove
 dpkg --remove <name>
 
-### check broken dependencies
+## check broken dependencies
+
 sudo apt-get check
 
-### search
+## search
+
 apt-cache search [string1 stringn]
 
-### list all available packages and search
+## list all available packages and search
+
 apt-cache pkgnames
 apt-cache search <packagename>
 
-### get package info
+## get package info
+
 apt-cache show <packagename>
 
-### dependencies
+## dependencies
+
 apt-cache showpkg  <packagename>
 
-### statistics
+## statistics
+
 apt-cache stats
 
-### distro update
+## distro update
+
 sudo apt-get dist-upgrade
 sudo apt-get install <packageName> --only-upgrade
 
-### install specific version
+## install specific version
+
 sudo apt-get install vsftpd=2.3.5-3ubuntu1
 
-### remove without removing configurations
+## remove without removing configurations
+
 sudo apt-get remove <packageName>
 
-### remove configurations
+## remove configurations
+
 sudo apt-get purge <packageName>
 
-### remove package and configuration
+## remove package and configuration
+
 sudo apt-get remove --purge <packageName>
 
-### cleanup diskspace
+## cleanup diskspace
+
 sudo apt-get clean
 
-### check log off a package
+## check log off a package
+
 sudo apt-get change log <packageName>
 
+## Get Debian version
 
-### Get Debian version:
 lsb_release -a
 
-### Disk info
+## Disk info
+
 sudo hdparm -I /dev/sda1
 
-### which kernels are installed?
+## which kernels are installed?
+
 dpkg --list | grep linux-image
 
 sudo dpkg -i  <package name.deb>
@@ -75,7 +94,7 @@ sudo dpkg --remove <package name>
 
 sudo add-apt-repository 'deb <https://typora.io/linux> ./'
 
+## Create and install rpm installation package
 
-### Create and install rpm installation package
 sudo alien packagename.rpm
 sudo dpkg -i packagename.deb

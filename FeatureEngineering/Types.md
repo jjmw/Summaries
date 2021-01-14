@@ -1,6 +1,6 @@
 # Data Types
 
-<img src="../images/DataTypes.png" width="300">
+<img src="../images/DataTypes.png" width="400">
 
 ## Nominal Variables
 
@@ -17,7 +17,7 @@ Can be meaningfully ordered are called ordinal:
 - Student's grade in an exam (A, B, C or Fail)
 - Days of the week (Monday = 1 and Sunday = 7)
 
-### Mixed Variables
+## Mixed Variables
 
 - Observations show either numbers or categories among their values
   - Number of credit accounts (1-100, U, T, M) U = unknown, T = unverified, M = unmatched)

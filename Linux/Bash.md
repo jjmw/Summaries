@@ -56,7 +56,8 @@ echo $SHLVL
 ```
 
 ### LINENO
-reports the number of commands that have been run in the session so far.
+
+Reports the number of commands that have been run in the session so far.
 
 ### TMOUT
 
