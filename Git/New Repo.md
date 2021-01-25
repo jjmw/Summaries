@@ -30,3 +30,8 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 # usage:
 glog -n 5
 ```
+
+
+## Setup git
+
+[git book])https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
