@@ -97,16 +97,18 @@ python      # Check path
 quit()
 
 pipenv install camelcase    # Install a package
+pipenv --rm   # remove the virtual environment
 pipenv lock -r      # Check local packages
-pipenv uninstall camelcase  # Uninstall a package
+pipenv lock -r > requirements.txt
+pipenv uninstall <package-name>  # Uninstall a package
 pipenv install nose --dev   # Install a dev package
 pipenv install -r ./requirements.txt    # Install from requirements.txt
 pipenv check    # Check security vulnerabilities
 pipenv graph    # Check dependency graph
 pipenv install --ignore-pipfile     # Ignore pipfile
 pipenv lock     # Set lockfile - before deployment
+pipenv run   python script.py
 exit    Exiting the virtualenv
-pipenv run *    # Run with pipenv
 ```
 
 [Source 1](https://dev.to/writingcode/the-python-virtual-environment-with-pyenv-pipenv-3mlo)

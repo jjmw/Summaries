@@ -11,8 +11,8 @@ jupyter --paths  # will list all of the possible locations for everything it use
 ```
 
 ```bash
-jupyter notebook --ip=0.0.0.0 --port=8080
-jupyter lab --ip=0.0.0.0 --port=8080
+jupyter notebook --ip=0.0.0.0 --port=8080 --no-browser
+jupyter lab --ip=0.0.0.0 --port=8080  --no-browser
 ```
 
 ```bash
@@ -29,7 +29,6 @@ findspark.init("/home/john/opt/spark")
 findspark.init()
 ```
 
-
-
 https://towardsdatascience.com/introducing-jupytext-9234fdff6c57
 https://github.com/mwouts/jupytext
+
