@@ -22,3 +22,10 @@ nvidia-settings
 ## monitoring nvidia
 
 https://github.com/fbcotter/py3nvml
+
+
+## successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+
+/sys/bus/pci/devices/0000:2b:00.0/numa_node
+
+https://stackoverflow.com/questions/44232898/memoryerror-in-tensorflow-and-successful-numa-node-read-from-sysfs-had-negativ
