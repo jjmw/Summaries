@@ -5,9 +5,9 @@ call db.schema.nodeTypeProperties
 
 
 ## show node with name "Tom Hanks"
-MATCH (tom {name: "Tom Hanks"}) RETURN tom
+MATCH (tom {name: "Tom"}) RETURN tom
 ## return all nodes in database
-MATCH (a:Person) RETURN a
+MATCH (a:Person) WHERE a.name = "Tom" RETURN a
 MATCH (a:Person) RETURN a.name
 
 ## with where clause
@@ -18,3 +18,8 @@ return a.title;
 
 ##  a list of all properties that match a string
 MATCH (n) WITH keys(n) AS p UNWIND p AS x WITH DISTINCT x WHERE x =~ ".*" RETURN collect(x) AS SET;
+  
+## delete all nodes and relations
+MATCH (n)
+DETACH DELETE n
+
