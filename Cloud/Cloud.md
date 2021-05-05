@@ -18,7 +18,7 @@
 - You own your own server, storage, and networking equipment within the colo facility (CapEx cost)
 - The facility owner provides power, cooling, and physical security for their customer’s server, storage, and networking equipment
 
-# Server Virtualisation
+# Server Virtualization
 <p align="center"> <img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Hyperviseur.png/400px-Hyperviseur.png" width="350"  title="Data Center Tiers"></p>
 
 1. Type 1 Hypervisors run directly on the system hardware (Bare Metal)
@@ -38,7 +38,7 @@ management effort or service provider interaction
 3. **Broad network access.** Capabilities are available over the network and accessed through standard mechanisms that promote use by heterogeneous thin or thick client platforms (e.g., mobile phones, tablets, laptops, and workstations).
 >Comments: Servers can be quickly provisioned and decommissioned based on current demand. Elasticity allows customers to achieve cost savings and is often a core justification for adoption
  
-4. **Resource pooling.** The provider’s computing resources are pooled to serve multiple consumers using a multi-tenant model, with different physical and virtual resources dynamically assigned and reassigned according to consumer demand. There is a sense of location independence in that the customer generally has no control or knowledge over the exact location of the provided resources but may be able to specify location at a higher level of abstraction (e.g., country, state, or datacenter). Examples of resources include storage, processing, memory, and network bandwidth.
+4. **Resource pooling.** The provider’s computing resources are pooled to serve multiple consumers using a multi-tenant model, with different physical and virtual resources dynamically assigned and reassigned according to consumer demand. There is a sense of location independence in that the customer generally has no control or knowledge over the exact location of the provided resources but may be able to specify location at a higher level of abstraction (e.g., country, state, or data center). Examples of resources include storage, processing, memory, and network bandwidth.
 
 5. **Rapid elasticity.** Capabilities can be elastically provisioned and released, in some cases automatically, to scale rapidly outward and inward commensurate with demand. To the consumer, the capabilities available for provisioning often appear to be unlimited and can be appropriated in any quantity at any time.
    

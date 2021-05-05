@@ -6,18 +6,22 @@
 cat .git/config    // wil list the remote and branch
 git add .    // adds all modifications to the staging area
 git commit -m "some text"  
-git push  // puches all modifications to the upstream repository
+git push  // push all modifications to the upstream repository
 ```
 
-### maak initieel een ssh key:
+### make initial ssh key:
+### register the rsa.public key on remote host
+```bash
+ssh-keygen -t rsa
+```
 
-registreer de rsa.public key op de remote host
-
-- ssh-keygen -t rsa
-
-### Test de connectie
+### add global username and email address
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
+```
+### Test connection
 
 - ssh -T [git@github.com](mailto:git@github.com)
 - ssh -T [git@bitbucket.org](mailto:git@bitbucket.org)
-voer een phrase password in
-
+enter a phrase password
