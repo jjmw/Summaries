@@ -15,11 +15,16 @@ match (a:Movie)
 where a.released >= 1990 and a.released < 1999
 return a.title;
 
-
 ##  a list of all properties that match a string
 MATCH (n) WITH keys(n) AS p UNWIND p AS x WITH DISTINCT x WHERE x =~ ".*" RETURN collect(x) AS SET;
-  
+
 ## delete all nodes and relations
 MATCH (n)
 DETACH DELETE n
 
+## create
+```cypher
+create (:Person {name = 'jan', age = 32})
+```
+
+match(n:Person {age: 32}) return n
